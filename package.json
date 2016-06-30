@@ -1,0 +1,47 @@
+{
+  "name": "modular-snippets",
+  "version": "0.0.0",
+  "description": "A modular solution to snippets in Atom.",
+  "keywords": [
+    "snippets",
+    "modular",
+    "config"
+  ],
+  "homepage": "https://atom.io/packages/modular-snippets",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielbayley/atom-modular-snippets.git"
+  },
+  "bugs": {
+    "url": "https://github.com/danielbayley/atom-modular-snippets/issues"
+  },
+  "author": "Daniel Bayley <daniel.bayley@me.com> (https://github.com/danielbayley)",
+  "private": true,
+  "license": "MIT",
+  "dependencies": {
+    "glob": "^7.0.5",
+    "require-cson": "^0.1.0"
+  },
+  "config": {
+    "local": [
+      "*snippets.cson",
+      "*snippets/",
+      "package.json",
+      "project.cson"
+    ]
+  },
+  "scripts": {
+    "preinstall": "cd \"${ATOM_HOME:-~/.atom}\" && mkdir -p snippets"
+  },
+  "engines": {
+    "atom": "*"
+  },
+  "providedServices": {
+    "modular-snippets": {
+      "description": "Load any snippets object, file or folder.",
+      "versions": {
+        "1.0.0": "provide"
+      }
+    }
+  }
+}
