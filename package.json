@@ -31,7 +31,7 @@
     ]
   },
   "scripts": {
-    "preinstall": "cd \"${ATOM_HOME:-~/.atom}\" && mkdir -p snippets"
+    "preinstall": "cd ${ATOM_HOME:-~/.atom} && mkdir -p snippets"
   },
   "engines": {
     "atom": "*"
