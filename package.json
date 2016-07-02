@@ -30,8 +30,8 @@
       "project.cson"
     ]
   },
-  "scripts": {
-    "preinstall": "cd \"${ATOM_HOME:-~/.atom}\" && mkdir -p snippets"
+	"scripts": {
+    "preinstall": "mkdir -p \"${ATOM_HOME:-$HOME/.atom}\"/snippets"
   },
   "engines": {
     "atom": "*"
