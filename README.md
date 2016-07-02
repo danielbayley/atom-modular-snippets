@@ -27,11 +27,11 @@ This package also provides a [service] to load any snippets `{object}`, file or 
 ~~~ js
 // package.json
 "consumedServices": {
-	"modular-snippets": {
-		"versions": {
-			"^1.0.0": "load"
-		}
-	}
+  "modular-snippets": {
+    "versions": {
+      "^1.0.0": "load"
+    }
+  }
 },
 ~~~
 ~~~ coffee
@@ -39,14 +39,14 @@ This package also provides a [service] to load any snippets `{object}`, file or 
 {Disposable} = require 'atom'
 
 load: (snippets) ->
-	@load = snippets.load
-	new Disposable -> stopUsingService snippets
+  @load = snippets.load
+  new Disposable -> stopUsingService snippets
 
 @load { # snippets {object}, file or folder.
-	'.source.coffee'
-		Snippet:
-			prefix: 'prefix'
-			body: 'snippet'
+  '.source.coffee'
+    Snippet:
+      prefix: 'prefix'
+      body: 'snippet'
 }
 ~~~
 
@@ -64,6 +64,7 @@ Thanks to [@thibmaek] for the base repository.
 [Daniel Bayley]:		https://github.com/danielbayley
 [atom]:							https://atom.io
 [apm]:							https://img.shields.io/apm/v/modular-snippets.svg?style=flat-square
+
 [`ATOM_HOME`]:			http://flight-manual.atom.io/using-atom/sections/basic-customization/#custom-home-location-with-an-environment-variable
 [service]:					http://flight-manual.atom.io/behind-atom/sections/interacting-with-other-packages-via-services
 [sync-settings]:		https://atom.io/packages/sync-settings
