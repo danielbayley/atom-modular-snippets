@@ -1,6 +1,6 @@
 {
   "name": "modular-snippets",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A modular solution to snippets in Atom.",
   "keywords": [
     "snippets",
@@ -30,7 +30,7 @@
       "project.cson"
     ]
   },
-	"scripts": {
+  "scripts": {
     "preinstall": "mkdir -p \"${ATOM_HOME:-$HOME/.atom}\"/snippets"
   },
   "engines": {
