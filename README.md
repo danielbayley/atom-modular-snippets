@@ -29,7 +29,7 @@ This package also provides a [service] to load any snippets `{object}`, file or 
 "consumedServices": {
   "modular-snippets": {
     "versions": {
-      "^1.0.0": "load"
+      "^1.0.0": "consume"
     }
   }
 },
@@ -38,16 +38,16 @@ This package also provides a [service] to load any snippets `{object}`, file or 
 # index.coffee
 {Disposable} = require 'atom'
 
-load: (snippets) ->
-  @load = snippets.load
-  new Disposable -> stopUsingService snippets
-
-@load { # snippets {object}, file or folder.
-  '.source.coffee'
+snippet = { # object }, file or folder.
+  '.source.coffee':
     Snippet:
       prefix: 'prefix'
       body: 'snippet'
 }
+consume: (@snippets) ->
+  new Disposable => stopUsingService @snippets
+
+@snippets.load snippet
 ~~~
 
 Install
