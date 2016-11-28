@@ -3,19 +3,19 @@
 
 Modular Snippets
 ================
-A modular solution to snippets in [Atom].
+A modular solution to [snippets] in [Atom], including support for project-specific collections.
 
-Any valid snippets (.cson) file inside [`ATOM_HOME`]`/snippets/**` will be loaded automatically, or reloaded if modified.
+Any valid snippets [_[CSON]_ or JSON] file inside [`ATOM_HOME`]`/snippets/**` will be loaded automatically, or reloaded if modified.
 
 This package does not interfere with the existing `snippets.cson`, so you can slowly transition to this more modular approach.
 
 The Atom `Snippets…` menu item will be overridden to open your snippets folder in a new window, along with the default `snippets.cson` if it still exists.
 
-Your snippets will be automatically added to the list of extra backup files if the [sync-settings] package is installed.
+The Atom `Snippets…` menu item will be overridden to open your snippets folder in a new window, along with the default `snippets.cson` if it still exists.
 
 Project Snippets
 ----------------
-Some snippets may only be relevant to a particular project, so it makes sense to store them with that project; these could then be committed to version control and shared between a team. These _local_ snippets are loaded from the first item found in the root of your project based on the following order:
+Some snippets might only be relevant to a particular project, so it makes sense to store them with that project; these could then be committed to version control and shared between a team. These _local_ snippets are loaded from the first item found in the root of your project based on the following order:
 
 * `[.]snippets.cson`
 * `[.]snippets/**/*.cson`
@@ -39,16 +39,15 @@ This package also provides a [service] to load any snippets `{object}`, file or 
 # index.coffee
 {Disposable} = require 'atom'
 
-snippet = { # object }, file or folder.
+snippet = # {object}, file or folder.
   '.source.coffee':
     Snippet:
       prefix: 'prefix'
       body: 'snippet'
-}
-consume: (@snippets) ->
-  new Disposable => stopUsingService @snippets
 
-@snippets.load snippet
+consumeSnippets: ({load}) ->
+  load snippet
+  new Disposable -> stopUsingService load
 ~~~
 
 Install
@@ -69,6 +68,8 @@ Thanks to [@thibmaek] for the base repository.
 [chat]:             https://img.shields.io/badge/chat-atom.io%20slack-ff69b4.svg?style=flat-square
 [#slack]:           https://atom-slack.herokuapp.com
 
+[snippets]:         http://flight-manual.atom.io/using-atom/sections/snippets
+[CSON]:             https://github.com/bevry/cson#what-is-cson
 [`ATOM_HOME`]:      http://flight-manual.atom.io/using-atom/sections/basic-customization/#custom-home-location-with-an-environment-variable
 [service]:          http://flight-manual.atom.io/behind-atom/sections/interacting-with-other-packages-via-services
 [sync-settings]:    https://atom.io/packages/sync-settings
