@@ -49,6 +49,27 @@ consumeSnippets: ({load}) ->
   load snippet
   new Disposable -> stopUsingService load
 ~~~
+or using ES6 if you’re into that…
+~~~ js
+// index.js
+'use babel';
+
+import { Disposable } from 'atom';
+
+let snippet = { // object }, file or folder.
+  '.source.js': {
+    Snippet: {
+      prefix: 'prefix',
+      body: 'snippet'
+    }
+  }
+};
+
+function consumeSnippets({load} => {
+  load(snippet);
+  return new Disposable(() => stopUsingService(load));
+}
+~~~
 
 Install
 -------
