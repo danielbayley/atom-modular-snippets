@@ -104,6 +104,7 @@ module.exports =
 			for name of snippets[scope]
 				snippet = snippets[scope][name]
 				if @valid snippet
+					snippet.rightLabelHTML ?= name
 					scopes[scope]["#{prefix}.#{name}"] = snippet #[uid()]
 					@scopes?.push scopes
 
