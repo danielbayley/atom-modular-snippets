@@ -7,28 +7,15 @@
     "modular",
     "config"
   ],
-  "homepage": "https://atom.io/packages/modular-snippets",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/danielbayley/atom-modular-snippets.git"
-  },
-  "bugs": {
-    "url": "https://github.com/danielbayley/atom-modular-snippets/issues"
-  },
+  "homepage": "https://atom.io/packages/modular-snippets#readme",
+  "repository": "danielbayley/atom-modular-snippets",
+  "bugs": "https://github.com/danielbayley/atom-modular-snippets/issues",
   "author": "Daniel Bayley <daniel.bayley@me.com> (https://github.com/danielbayley)",
   "private": true,
   "license": "MIT",
   "dependencies": {
     "glob": "^7.0.5",
     "require-cson": "^0.1.0"
-  },
-  "config": {
-    "local": [
-      "*snippets.cson",
-      "*snippets/",
-      "package.json",
-      "project.cson"
-    ]
   },
   "scripts": {
     "preinstall": "mkdir -p \"${ATOM_HOME:-$HOME/.atom}\"/snippets"

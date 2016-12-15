@@ -3,95 +3,95 @@
 {sync} = require 'glob'
 
 module.exports =
-	package: require './package.json'
-	#config: -> atom.config.get 'modular-snippets'
+  package: require './package.json'
+  #config: -> atom.config.get 'modular-snippets'
 
-	project: atom.project.getPaths()[0]
-	#editor: -> atom.workspace.getActiveTextEditor()
-	#pattern: 'snippets/**'
-	#backup: 'sync-settings.extraFiles'
+  project: atom.project.getPaths()[0]
+  #editor: -> atom.workspace.getActiveTextEditor()
+  #pattern: 'snippets/**'
+  #backup: 'sync-settings.extraFiles'
 
-	subs: null
-	activate: ->
-		require 'require-cson'
-		{CompositeDisposable} = require 'atom' #Disposable
-		@subs = new CompositeDisposable
-
-#-------------------------------------------------------------------------------
-		@reload()
-
-		# TODO break Gist sync into sync-snippets-gists package?
-		#if atom.config.get 'modular-snippets.syncSnippets'
-			#
-
-		# Backup snippets with sync-settings if installed
-		#if atom.packages.isPackageLoaded 'sync-settings'
-			#atom.config.pushAtKeyPath 'sync-settings.syncSnippets', false
-			#unless @pattern in atom.config.get @backup
-				#atom.config.pushAtKeyPath @backup, @pattern
+  subs: null
+  activate: ->
+    require 'require-cson'
+    {CompositeDisposable} = require 'atom' #Disposable
+    @subs = new CompositeDisposable
 
 #-------------------------------------------------------------------------------
+    @reload()
 
-		@subs.add atom.commands.add 'atom-workspace', #body
-			'modular-snippets:open': =>
-				@open sync "#{atom.configDirPath}/snippets{,.cson}"
-			#application:open-your-snippets
-			'modular-snippets:reload': => @reload() #@cache = false
+    # TODO break Gist sync into sync-snippets-gists package?
+    #if atom.config.get 'modular-snippets.syncSnippets'
+      #
 
-		# Automatically reload modified snippets
-		@subs.add atom.workspace.observeTextEditors (editor) =>
-			path = editor.getPath()
-			tab = editor.getTitle()
-			folder = /// (#{atom.configDirPath}|#{@project})/snippets(/.+)+\.cson ///
-			editor.onDidSave =>
-				match = @package.config?.local?.filter (file) -> ///#{tab}///.test file
-
-				@reload() if path.startsWith(@project) and match[0]? or folder.test path
+    # Backup snippets with sync-settings if installed
+    #if atom.packages.isPackageLoaded 'sync-settings'
+      #atom.config.pushAtKeyPath 'sync-settings.syncSnippets', false
+      #unless @pattern in atom.config.get @backup
+        #atom.config.pushAtKeyPath @backup, @pattern
 
 #-------------------------------------------------------------------------------
 
-	# API
-	provide: ->
-		load: (snippets) =>
-			@cache = true
-			@read snippets
+    @subs.add atom.commands.add 'atom-workspace', #body
+      'modular-snippets:open': =>
+        @open sync "#{atom.configDirPath}/snippets{,.cson}"
+      #application:open-your-snippets
+      'modular-snippets:reload': => @reload() #@cache = false
 
-	reload: ->
-		if @cache #or @config()?.cacheSnippets
-			@scopes ?= []
-			@snippets ?= {}
-		else
-			@scopes = []
-			@snippets = {}
+    # Automatically reload modified snippets
+    @subs.add atom.workspace.observeTextEditors (editor) =>
+      path = editor.getPath()
+      tab = editor.getTitle()
+      folder = /// (#{atom.configDirPath}|#{@project})/snippets(/.+)+\.cson ///
+      editor.onDidSave =>
+        match = @package.config?.local?.filter (file) -> ///#{tab}///.test file
 
-		@read "#{atom.configDirPath}/snippets" #@pattern
+        @reload() if path.startsWith(@project) and match[0]? or folder.test path
 
-		# Project local snippets
-		try delete require.cache[require.resolve "#{@project}/package.json"]
-		local = =>
-			for item in @package.config?.local #when
-				item = sync "#{@project}/#{item}", {dot: true} #cwd: @project
-				try if @file = item[0]
-					{snippets} = read = require @file
-					return snippets if snippets
-					return read for key of read when /\.(source|text)/.test key
-				catch
-					return @file #unless /\.[cj]son$/.test @file
-		@read local() # snippets
+#-------------------------------------------------------------------------------
 
-	read: (snippets) ->
-		if typeof snippets is 'object'
-			@load snippets
-		else if snippets
-			snippets = "#{snippets}/**/*.cson" unless /\.[cj]son$/.test snippets
+  # API
+  provide: ->
+    load: (snippets) =>
+      @cache = true
+      @read snippets
 
-			for @file in sync snippets
-				try {snippets} = read = require @file
-				@load snippets ? read
+  reload: ->
+    if @cache #or @config()?.cacheSnippets
+      @scopes ?= []
+      @snippets ?= {}
+    else
+      @scopes = []
+      @snippets = {}
 
-	valid: (snippet) ->
-		if parse stringify snippet
-			true if snippet.prefix? and snippet.body?
+    @read "#{atom.configDirPath}/snippets" #@pattern
+
+    # Project local snippets
+    try delete require.cache[require.resolve "#{@project}/package.json"]
+    local = =>
+      for item in @package.config?.local #when
+        item = sync "#{@project}/#{item}", {dot: true} #cwd: @project
+        try if @file = item[0]
+          {snippets} = read = require @file
+          return snippets if snippets
+          return read for key of read when /\.(source|text)/.test key
+        catch
+          return @file #unless /\.[cj]son$/.test @file
+    @read local() # snippets
+
+  read: (snippets) ->
+    if typeof snippets is 'object'
+      @load snippets
+    else if snippets
+      snippets = "#{snippets}/**/*.cson" unless /\.[cj]son$/.test snippets
+
+      for @file in sync snippets
+        try {snippets} = read = require @file
+        @load snippets ? read
+
+  valid: (snippet) ->
+    if parse stringify snippet
+      true if snippet.prefix? and snippet.body?
 
 	load: (snippets = {}) ->
 		for scope in Object.keys snippets
@@ -108,18 +108,18 @@ module.exports =
 					scopes[scope]["#{prefix}.#{name}"] = snippet #[uid()]
 					@scopes?.push scopes
 
-		for @scope in @scopes
-			scope = Object.keys @scope
-			snippets = Object.keys @scope[scope]
+    for @scope in @scopes
+      scope = Object.keys @scope
+      snippets = Object.keys @scope[scope]
 
-			for snippet in snippets
-				@snippets[scope][snippet] = @scope[scope][snippet]
+      for snippet in snippets
+        @snippets[scope][snippet] = @scope[scope][snippet]
 
-		writeFileSync "#{atom.configDirPath}/snippets.json", stringify @snippets
-			#stringify @snippets#, null, @editor().getTabText()
+    writeFileSync "#{atom.configDirPath}/snippets.json", stringify @snippets
+      #stringify @snippets#, null, @editor().getTabText()
 
-	open: (snippets) -> # folder
-		atom.open pathsToOpen: snippets
+  open: (snippets) -> # folder
+    atom.open pathsToOpen: snippets
 
 #-------------------------------------------------------------------------------
-	deactivate: -> @subs.dispose()
+  deactivate: -> @subs.dispose()

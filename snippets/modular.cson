@@ -1,44 +1,44 @@
 '.source.coffee':
-	consume: # service
-		prefix: 'snippets consume'
-		body: '''
-			consumedServices:
-			  'modular-snippets':
-			    versions: '^1.0.0': '${1:load}'
-		'''
-	load: # (snippets)
-		prefix: 'snippets load'
-		body: '''
-			{Disposable} = require 'atom'
+  consume: # service
+    prefix: 'snippets consume'
+    body: '''
+      consumedServices:
+        'modular-snippets':
+          versions: '^1.0.0': '${1:load}'
+    '''
+  load: # (snippets)
+    prefix: 'snippets load'
+    body: '''
+      {Disposable} = require 'atom'
 
-			${1:load}: (${2:snippets}) ->
-			  @${1:load} = ${2:snippets}.load
-			  new Disposable -> stopUsingService ${2:snippets}
+      ${1:load}: (${2:snippets}) ->
+        @${1:load} = ${2:snippets}.load
+        new Disposable -> stopUsingService ${2:snippets}
 
-			@${1:load} $3
-			'''
+      @${1:load} $3
+      '''
 #-------------------------------------------------------------------------------
 '.source.json':
-	consume:
-		prefix: 'snippets consume'
-		body: '''
-			"consumedServices": {
-			  "modular-snippets": {
-			    "versions": {
-			      "^1.0.0": "${1:load}"
-			    }
-			  }
-			},
-		'''
+  consume:
+    prefix: 'snippets consume'
+    body: '''
+      "consumedServices": {
+        "modular-snippets": {
+          "versions": {
+            "^1.0.0": "${1:load}"
+          }
+        }
+      },
+    '''
 '.source.js':
-	ES6:
-		prefix: 'snippets load'
-		body: '''
-			import { Disposable } from 'atom'
+  ES6:
+    prefix: 'snippets load'
+    body: '''
+      import { Disposable } from 'atom'
 
-			${1:load}(${2:snippets}) {
-			  ${1:load} = ${2:snippets}.load
-			  return new Disposable(() => stopUsingService(${2:snippets}))
-			}
-			${1:load} $3
-			'''
+      ${1:load}(${2:snippets}) {
+        ${1:load} = ${2:snippets}.load
+        return new Disposable(() => stopUsingService(${2:snippets}))
+      }
+      ${1:load} $3
+      '''

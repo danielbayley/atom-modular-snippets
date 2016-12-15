@@ -1,4 +1,5 @@
-[![apm]](https://atom.io/packages/modular-snippets)
+[![badge][apm]][package]
+[![badge][chat]][#slack]
 
 Modular Snippets
 ================
@@ -14,12 +15,12 @@ Your snippets will be automatically added to the list of extra backup files if t
 
 Project Snippets
 ----------------
-Some snippets may only be relevant to a particular project, so it makes sense to store them with that project; these could then be committed to version control and shared between a team. These _local_ snippets are loaded from the first item found in the root of your project base on the following order:
+Some snippets may only be relevant to a particular project, so it makes sense to store them with that project; these could then be committed to version control and shared between a team. These _local_ snippets are loaded from the first item found in the root of your project based on the following order:
 
 * `[.]snippets.cson`
 * `[.]snippets/**/*.cson`
 * `snippets: {object}` in `package.json`
-* `snippets: {object}` in [`project.cson`]
+* `snippets: {object}` in your _[project-config]_
 
 API
 ---
@@ -60,14 +61,17 @@ License
 
 Thanks to [@thibmaek] for the base repository.
 
-[MIT]:							LICENSE.md
-[Daniel Bayley]:		https://github.com/danielbayley
-[atom]:							https://atom.io
-[apm]:							https://img.shields.io/apm/v/modular-snippets.svg?style=flat-square
+[MIT]:              LICENSE.md
+[Daniel Bayley]:    https://github.com/danielbayley
+[atom]:             https://atom.io
+[apm]:              https://img.shields.io/apm/v/modular-snippets.svg?style=flat-square
+[package]:          https://atom.io/packages/modular-snippets
+[chat]:             https://img.shields.io/badge/chat-atom.io%20slack-ff69b4.svg?style=flat-square
+[#slack]:           https://atom-slack.herokuapp.com
 
-[`ATOM_HOME`]:			http://flight-manual.atom.io/using-atom/sections/basic-customization/#custom-home-location-with-an-environment-variable
-[service]:					http://flight-manual.atom.io/behind-atom/sections/interacting-with-other-packages-via-services
-[sync-settings]:		https://atom.io/packages/sync-settings
-[`project.cson`]:		https://github.com/danielbrodin/atom-project-manager/#local-settings-file
-[gist]:							https://github.com/gist
-[@thibmaek]:				https://atom.io/users/thibmaek
+[`ATOM_HOME`]:      http://flight-manual.atom.io/using-atom/sections/basic-customization/#custom-home-location-with-an-environment-variable
+[service]:          http://flight-manual.atom.io/behind-atom/sections/interacting-with-other-packages-via-services
+[sync-settings]:    https://atom.io/packages/sync-settings
+[project-config]:   https://github.com/danielbrodin/atom-project-manager/#local-settings-file
+[gist]:             https://github.com/gist
+[@thibmaek]:        https://atom.io/users/thibmaek

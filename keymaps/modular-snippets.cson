@@ -1,9 +1,9 @@
-#	These are disabled by default.
+# These are disabled by default.
 '.platform-darwin atom-workspace, .platform-darwin body':
-	'cmd-e s': 'modular-snippets:open' #application:open-your-snippets
-	'cmd-r s': 'modular-snippets:reload'
+  'cmd-e s': 'modular-snippets:open' #application:open-your-snippets
+  'cmd-r s': 'modular-snippets:reload'
 
 '.platform-win32 atom-workspace, .platform-win32 body,
  .platform-linux atom-workspace, .platform-linux body':
-	'ctrl-e s': 'modular-snippets:open' #application:open-your-snippets
-	'ctrl-r s': 'modular-snippets:reload'
+  'ctrl-e s': 'modular-snippets:open' #application:open-your-snippets
+  'ctrl-r s': 'modular-snippets:reload'

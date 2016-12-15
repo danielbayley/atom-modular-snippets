@@ -1,6 +1,6 @@
 menu: [
-	label: "Atom"
-	submenu: [
-		label: "Snippets…"
-		command: 'modular-snippets:open'
-]	]
+  label: "Atom"
+  submenu: [
+    label: "Snippets…"
+    command: 'modular-snippets:open'
+]  ]
