@@ -14,7 +14,7 @@
   "private": true,
   "license": "MIT",
   "dependencies": {
-    "glob": "^7.0.5",
+    "glob-all": "^3.1.0",
     "require-cson": "^0.1.0"
   },
   "scripts": {
@@ -23,12 +23,20 @@
   "engines": {
     "atom": "*"
   },
+  "main": "lib/index",
   "providedServices": {
     "modular-snippets": {
       "description": "Load any snippets object, file or folder.",
       "versions": {
         "1.0.0": "provide"
       }
+    }
+  },
+  "configSchema": {
+    "notify": {
+      "description": "Display notification once snippets are available for use.",
+      "type": "boolean",
+      "default": false
     }
   }
 }

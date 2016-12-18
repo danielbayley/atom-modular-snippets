@@ -3,6 +3,6 @@ menu: [
   submenu: [
     label: "Modular Snippets"
     submenu: [
-      { label: "Open", command: 'modular-snippets:open'}
-      { label: "Reload", command: 'modular-snippets:reload'}
-]  ]  ]
+      label: "Open"
+      command: 'modular-snippets:open'
+] ] ]
