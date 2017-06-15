@@ -18,7 +18,7 @@
     "require-cson": "^0.1.0"
   },
   "scripts": {
-    "preinstall": "mkdir -p \"${ATOM_HOME:-$HOME/.atom}\"/snippets"
+    "preinstall": "node preinstall.js"
   },
   "engines": {
     "atom": "*"
