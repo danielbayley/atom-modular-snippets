@@ -98,7 +98,20 @@ load = (snippets, path) =>
     for title, snippet of snippets[scope]
       try
         snippet = filter path, title, snippet
-        @snippets[scope] = assign @snippets[scope] ? {}, snippet
+
+        # If we're using multiple prefixes
+        if snippet[path + ":" + title]['prefix'] instanceof Array
+          for prefix, index in snippet[path + ":" + title]['prefix']
+
+            new_key = path + ":" + title + ":" + index
+
+            sub_snippet = {}
+            sub_snippet[new_key] = JSON.parse(JSON.stringify(snippet[path + ":" + title]))
+            sub_snippet[new_key]['prefix'] = prefix
+
+            @snippets[scope] = assign @snippets[scope] ? {}, sub_snippet
+        else
+          @snippets[scope] = assign @snippets[scope] ? {}, snippet
       catch err
         error err, path
   #return @snippets
